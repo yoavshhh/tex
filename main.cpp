@@ -2,6 +2,9 @@
 
 #include "tex.hpp"
 
+namespace tex 
+{
+
 int main(void)
 {
     Tex tex_app;
@@ -14,3 +17,6 @@ int main(void)
     tex_app.Finish();
     return 0;
 }
+
+}
+

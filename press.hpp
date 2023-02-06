@@ -1,8 +1,14 @@
 #include <map>
 
+namespace tex
+{
+    
 struct Press {
     int ch;
-    bool rshift, lshift;
-    bool rctrl, lctrl;
-    bool ralt, lalt;
+    bool shift;
+    bool ctrl;
+    bool alt;
 };
+
+}
+
