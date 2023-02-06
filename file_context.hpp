@@ -16,12 +16,16 @@ public:
     std::string fileName;
     file_content content;
     line::iterator currentPosition;
+    int currentPositionIndex;
     file_content::iterator currentLine;
+    int currentLineIndex;
     State state;
 
     FileContext(std::string fileName);
 
     void insertChar(char ch);
+
+    void Enter();
 };
 
 }

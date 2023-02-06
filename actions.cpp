@@ -7,4 +7,8 @@ namespace tex
         tex->currentContext.insertChar(tex->lastPress.ch);
     }
 
+    void Enter(Tex* tex) {
+        tex->currentContext.Enter();
+    }
+
 }

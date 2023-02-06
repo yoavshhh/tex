@@ -18,6 +18,13 @@ bool Tex::Init()
         p.ch = (char)i;
         this->inputMap.insert(std::make_pair(p, insertChar));
     }
+
+    Press p = {0};
+    p.ch = '\n'; // \n (enter)
+    this->inputMap.insert(std::make_pair(p, Enter));
+    p = {0};
+    p.ch = (char)13; // \n (enter)
+    this->inputMap.insert(std::make_pair(p, Enter));
     return true;
 }
 
@@ -35,6 +42,7 @@ void Tex::MainLoop()
     while(lastPress.ch != 'A')
     {
         int ch = getch();
+        std:: cout << "last pressed:" << ch << std:: endl;
         lastPress.ch = (char)ch;
         std::function<void(Tex*)> a = inputMap[lastPress];
         a(this);
