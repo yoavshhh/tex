@@ -1,5 +1,7 @@
+#pragma once
 #define GXX_EXPERIMENTAL_CXX0X
 #include <unordered_map>
+#include <string>
 #include <functional>
 
 #include "press.hpp"
@@ -10,10 +12,10 @@ namespace tex
 {
 
 class Tex {
-private:
-    FileContext currentContext;
 public:
     std::unordered_map<Press, std::function<void(Tex*)>> inputMap;
+    FileContext currentContext;
+    Press lastPress; // in future - stack of last presses to enable restore
 
     Tex();
     Tex(std::string fileName);

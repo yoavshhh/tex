@@ -1,3 +1,4 @@
+#pragma once
 #include <string>
 #include <list>
 
@@ -19,6 +20,8 @@ public:
     State state;
 
     FileContext(std::string fileName);
+
+    void insertChar(char ch);
 };
 
 }

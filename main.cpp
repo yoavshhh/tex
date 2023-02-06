@@ -2,12 +2,9 @@
 
 #include "tex.hpp"
 
-namespace tex 
-{
-
 int main(void)
 {
-    Tex tex_app;
+    tex::Tex tex_app;
     if (!tex_app.Init())
     {
         std::cout << "Could not initialize" << std::endl;
@@ -16,7 +13,5 @@ int main(void)
     tex_app.MainLoop();
     tex_app.Finish();
     return 0;
-}
-
 }
 
