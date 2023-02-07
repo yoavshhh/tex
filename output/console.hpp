@@ -2,11 +2,10 @@
 
 #include <utility>
 
+typedef std::pair<int, int> pnt;
+
 namespace tex
 {
-
-
-typedef std::pair<int, int> pnt;
 
 class Console {
 public:

@@ -18,7 +18,10 @@ Tex::Tex(std::string fileName) :
 bool Tex::Init()
 {
     // console initialization
-    console->Init();
+    if (!console->Init())
+    {
+        return false;
+    }
     Press p = {0};
 
     // up arrow
@@ -79,7 +82,7 @@ void Tex::MainLoop()
     while(lastPress.ch != 'A')
     {
         lastPress = Press::getPress();
-        // system("clear");
+        system("clear");
         lastPress.print();
         auto inputPair = inputMap.find(lastPress);
         if (inputPair == inputMap.end())

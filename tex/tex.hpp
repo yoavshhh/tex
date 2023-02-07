@@ -6,12 +6,12 @@
 #include <functional>
 #include <conio.h>
 
-#include "user_input.hpp"
+#include "../input/user_input.hpp"
 #include "state.hpp"
-#include "file_context.hpp"
+#include "../context/file_context.hpp"
 #include "actions.hpp"
-#include "console.hpp"
-#include "color.hpp"
+#include "../output/console.hpp"
+#include "../output/colors/color.hpp"
 
 namespace tex 
 {
