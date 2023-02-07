@@ -2,7 +2,7 @@
 #include <string>
 #include <list>
 
-#include "state.hpp"
+#include "../tex/state.hpp"
 
 typedef std::list<char> line;
 typedef std::list<line> file_content;
