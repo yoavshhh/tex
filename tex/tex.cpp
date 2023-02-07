@@ -18,14 +18,10 @@ Tex::Tex(std::string fileName) :
 bool Tex::Init()
 {
     // console initialization
-<<<<<<< HEAD:tex.cpp
-    console->Init();
-=======
     if (!console->Init())
     {
         return false;
     }
->>>>>>> 836be1c1d5a91d8ae938d3d3619b7b0298a7164f:tex/tex.cpp
     Press p = {0};
 
     // up arrow
