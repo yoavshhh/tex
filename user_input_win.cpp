@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include "user_input_win.hpp"
 
 namespace tex
@@ -174,3 +176,5 @@ Press Press::getPress()
 
 
 }
+
+#endif

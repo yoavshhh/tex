@@ -3,11 +3,22 @@
 namespace tex
 {
 
-Tex::Tex() : inputMap({}), currentContext(FileContext("")), lastPress({0}) { }
-Tex::Tex(std::string fileName) : inputMap({}), currentContext(FileContext(fileName)), lastPress({0}) { }
+Tex::Tex() :
+    console(Console::getConsole()),
+    inputMap({}),
+    currentContext(FileContext("")),
+    lastPress({0}) { }
+
+Tex::Tex(std::string fileName) :
+    console(Console::getConsole()),
+    inputMap({}),
+    currentContext(FileContext(fileName)),
+    lastPress({0}) { }
 
 bool Tex::Init()
 {
+    // console initialization
+    console->Init();
     Press p = {0};
     // mapping all printable ascii letters with clear state
     for(char ch = 32; ch <= 126; ch++) 
