@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <iostream>
+#include <algorithm>
 #include <list>
 
 #include "../tex/state.hpp"
@@ -17,10 +19,10 @@ private:
 public:
     std::string fileName;
     file_content content;
-    line::iterator currentPosition;
-    int currentPositionIndex;
     file_content::iterator currentLine;
     int currentLineIndex;
+    line::iterator currentPosition;
+    int currentPositionIndex;
     State state;
 
     FileContext(std::string fileName);

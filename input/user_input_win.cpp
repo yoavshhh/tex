@@ -11,7 +11,7 @@ void Press::Init()
     HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
     DWORD raw_mode = 0;
 
-    // SetConsoleMode(hInput, raw_mode);
+    SetConsoleMode(hInput, raw_mode);
 }
 
 Press Press::getPress()
