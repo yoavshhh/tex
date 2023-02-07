@@ -1,11 +1,15 @@
 #include "user_input_win.hpp"
 
+namespace tex
+{
+
+
 void Press::Init()
 {
     HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
     DWORD raw_mode = 0;
 
-    SetConsoleMode(hInput, raw_mode);
+    // SetConsoleMode(hInput, raw_mode);
 }
 
 Press Press::getPress()
@@ -61,10 +65,21 @@ Press Press::getPress()
                     press.ch = eventRecord.Event.KeyEvent.wVirtualKeyCode;
                     break;
 
+				case VK_OEM_1:
+				case VK_OEM_2:
+				case VK_OEM_3:
+				case VK_OEM_4:
+				case VK_OEM_5:
+				case VK_OEM_6:
+				case VK_OEM_7:
+				case VK_OEM_8:
+					press.ch = eventRecord.Event.KeyEvent.uChar.AsciiChar;
+					break;
+
                 case VK_SHIFT:
                 case VK_CONTROL:
                 case VK_MENU:
-                    std::cout << eventRecord.Event.KeyEvent.wVirtualKeyCode;
+                    // std::cout << eventRecord.Event.KeyEvent.wVirtualKeyCode << std::endl;
                     continue;
 
                 case VK_CLEAR:
@@ -123,14 +138,6 @@ Press Press::getPress()
 				case VK_F23:
 				case VK_F24:
 				case VK_SCROLL:
-				case VK_OEM_1:
-				case VK_OEM_2:
-				case VK_OEM_3:
-				case VK_OEM_4:
-				case VK_OEM_5:
-				case VK_OEM_6:
-				case VK_OEM_7:
-				case VK_OEM_8:
 				case VK_PROCESSKEY:
 				case VK_ATTN:
 				case VK_CRSEL:
@@ -141,6 +148,7 @@ Press Press::getPress()
 				case VK_NONAME:
 				case VK_PA1:
 				case VK_OEM_CLEAR:
+					std::cout << (int)eventRecord.Event.KeyEvent.wVirtualKeyCode << " | " << (int)eventRecord.Event.KeyEvent.uChar.AsciiChar << std::endl;
                     continue;
                 
                 default:
@@ -152,7 +160,8 @@ Press Press::getPress()
                     press.state |= KB_SHIFT;
                 if (GetAsyncKeyState(VK_CONTROL) & PRESSED_MASK)
                 {
-                    press.ch |= 0x40;
+					if (press.ch >= 32)
+						press.ch |= 0x40;
                     press.state |= KB_CTRL;
                 }
                 if (GetAsyncKeyState(VK_MENU) & PRESSED_MASK)
@@ -161,4 +170,7 @@ Press Press::getPress()
             }
         }
     }
+}
+
+
 }

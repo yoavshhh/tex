@@ -1,8 +1,4 @@
-#include <conio.h>
-#include <iostream>
-
 #include "tex.hpp"
-#include "actions.hpp"
 
 namespace tex
 {
@@ -12,19 +8,26 @@ Tex::Tex(std::string fileName) : inputMap({}), currentContext(FileContext(fileNa
 
 bool Tex::Init()
 {
-    for(int i = 32; i <= 126; i++) 
+    Press p = {0};
+    // mapping all printable ascii letters with clear state
+    for(char ch = 32; ch <= 126; ch++) 
     {
-        Press p = {0};
-        p.ch = (char)i;
+        p = { .ch = ch, .state = KB_NONE };
         this->inputMap.insert(std::make_pair(p, insertChar));
     }
+    // mapping all printable ascii letters with shift state
+    for(char ch = 32; ch <= 126; ch++) 
+    {
+        p = { .ch = ch, .state = KB_SHIFT };
+        this->inputMap.emplace(std::make_pair(p, insertChar));
+    }
 
-    Press p = {0};
-    p.ch = '\n'; // \n (enter)
-    this->inputMap.insert(std::make_pair(p, Enter));
-    p = {0};
-    p.ch = (char)13; // \n (enter)
-    this->inputMap.insert(std::make_pair(p, Enter));
+    // enter/return
+    p = { .ch = '\r', .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, enter));
+    // shift + enter/return
+    p = { .ch = '\r', .state = KB_SHIFT };
+    this->inputMap.emplace(std::make_pair(p, enter));
     return true;
 }
 
@@ -41,11 +44,16 @@ void Tex::MainLoop()
 {
     while(lastPress.ch != 'A')
     {
-        int ch = getch();
-        std:: cout << "last pressed:" << ch << std:: endl;
-        lastPress.ch = (char)ch;
-        std::function<void(Tex*)> a = inputMap[lastPress];
-        a(this);
+        lastPress = Press::getPress();
+        system("clear");
+        auto inputPair = inputMap.find(lastPress);
+        if (inputPair == inputMap.end())
+        {
+            std::cout << "couldn't find ";
+            lastPress.print();
+            continue;
+        }
+        inputPair->second(*this);
         printContent(currentContext.content);
     }
 }

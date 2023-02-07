@@ -25,7 +25,7 @@ public:
 
     void insertChar(char ch);
 
-    void Enter();
+    void enter();
 };
 
 }

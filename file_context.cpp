@@ -19,7 +19,7 @@ void FileContext::insertChar(char ch)
     std::cout << "current pos: " << currentPositionIndex << ", and current line: " << currentLineIndex << std::endl;
 }
 
-void FileContext::Enter() 
+void FileContext::enter() 
 {
     (*currentLine).emplace(currentPosition, '\n');
     currentPositionIndex++;

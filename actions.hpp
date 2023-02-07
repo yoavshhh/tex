@@ -4,7 +4,7 @@
 namespace tex
 {
 
-    void insertChar(Tex* tex);
+void insertChar(class Tex &t);
+void enter(class Tex &t);
 
-    void Enter(Tex* tex);
 }
