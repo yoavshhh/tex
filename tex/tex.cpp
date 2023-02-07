@@ -18,8 +18,41 @@ Tex::Tex(std::string fileName) :
 bool Tex::Init()
 {
     // console initialization
+<<<<<<< HEAD:tex.cpp
     console->Init();
+=======
+    if (!console->Init())
+    {
+        return false;
+    }
+>>>>>>> 836be1c1d5a91d8ae938d3d3619b7b0298a7164f:tex/tex.cpp
     Press p = {0};
+
+    // up arrow
+    p = { .ch = (char)38, .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, movePosUp));
+    // down arrow
+    p = { .ch = (char)40, .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, movePosDown));
+    // left arrow
+    p = { .ch = (char)37, .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, movePosLeft));
+    // right arrow
+    p = { .ch = (char)39, .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, movePosRight));
+
+    // enter/return
+    p = { .ch = '\r', .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, enter));
+    // shift + enter/return
+    p = { .ch = '\r', .state = KB_SHIFT };
+    this->inputMap.emplace(std::make_pair(p, enter));
+
+    // backspace
+    p = { .ch = (char)8, .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, backspace));
+
+
     // mapping all printable ascii letters with clear state
     for(char ch = 32; ch <= 126; ch++) 
     {
@@ -33,22 +66,19 @@ bool Tex::Init()
         this->inputMap.emplace(std::make_pair(p, insertChar));
     }
 
-    // enter/return
-    p = { .ch = '\r', .state = KB_NONE };
-    this->inputMap.emplace(std::make_pair(p, enter));
-    // shift + enter/return
-    p = { .ch = '\r', .state = KB_SHIFT };
-    this->inputMap.emplace(std::make_pair(p, enter));
+    
     return true;
 }
 
 void printContent(file_content content)
 {
-    std::cout << "content:\n";
-    for (const auto& obj1 : content)
-        for (const auto& obj2 : obj1)
+    std::cout << "content:\n" << std::endl;
+    for (const auto& obj1 : content) {
+        for (const auto& obj2 : obj1) {
             std::cout << obj2;
+        }
         std::cout << '\n';
+    }
 }
 
 void Tex::MainLoop()
@@ -57,6 +87,7 @@ void Tex::MainLoop()
     {
         lastPress = Press::getPress();
         system("clear");
+        lastPress.print();
         auto inputPair = inputMap.find(lastPress);
         if (inputPair == inputMap.end())
         {
@@ -65,6 +96,8 @@ void Tex::MainLoop()
             continue;
         }
         inputPair->second(*this);
+        
+        std::cout << "current pos: " << currentContext.currentPositionIndex << ", and current line: " << currentContext.currentLineIndex << std::endl;
         printContent(currentContext.content);
     }
 }
