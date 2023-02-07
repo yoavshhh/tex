@@ -12,8 +12,6 @@ public:
 
     Display();
 
-    bool Init();
-
     void matchCursorPos(FileContext &context);
 
     void clearLine(FileContext &context);
@@ -28,8 +26,6 @@ public:
     bool setCursorPos(const pnt& pos);
     void insertCharAtCursor(char ch);
     void clearCharAtCursor();
-private:
-    int headerLinePadding;
 };
 
 }
