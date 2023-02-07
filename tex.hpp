@@ -10,12 +10,15 @@
 #include "state.hpp"
 #include "file_context.hpp"
 #include "actions.hpp"
+#include "console.hpp"
+#include "color.hpp"
 
 namespace tex 
 {
 
 class Tex {
 public:
+    Console *console;
     std::unordered_map<Press, std::function<void(Tex&)>> inputMap;
     FileContext currentContext;
     Press lastPress; // in future - stack of last presses to enable restore
