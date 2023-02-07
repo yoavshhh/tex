@@ -21,6 +21,9 @@ public:
     virtual bool getConsoleBufferSize(pnt& pos) = 0;
     virtual bool setConsoleBufferSize(const pnt& pos) = 0;
 
+    virtual void insertCharAtCursor(char ch);
+    virtual void clearCharAtCursor();
+
     // Factory
     static Console *getConsole(void);
 };

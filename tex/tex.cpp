@@ -82,6 +82,11 @@ void Tex::MainLoop()
     while(lastPress.ch != 'A')
     {
         lastPress = Press::getPress();
+<<<<<<< HEAD
+=======
+        // system("cls");
+        // lastPress.print();
+>>>>>>> 35dfe0f (moving computers)
         auto inputPair = inputMap.find(lastPress);
         if (inputPair == inputMap.end())
         {
@@ -92,6 +97,13 @@ void Tex::MainLoop()
         inputPair->second(*this);
         // std::cout << "current pos: " << currentContext.currentPositionIndex << ", and current line: " << currentContext.currentLineIndex << std::endl;
         // printContent(currentContext.content);
+<<<<<<< HEAD
+=======
+        // if (!console->setCursorPos({currentContext.currentPositionIndex, currentContext.currentLineIndex}))
+        // {
+            // std::cerr << "didn't work" << std::endl;
+        // }
+>>>>>>> 35dfe0f (moving computers)
     }
 }
 

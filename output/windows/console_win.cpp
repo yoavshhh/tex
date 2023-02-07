@@ -111,6 +111,16 @@ bool ConsoleWin::setConsoleBufferSize(const pnt& pos)
     return SetConsoleScreenBufferSize(hConsoleBuffer, { (short)pos.first, (short)pos.second });
 }
 
+// void ConsoleWin::insertCharAtCursor(char ch)
+// {
+//     std::cout << ch;
+// }
+
+// void ConsoleWin::clearCharAtCursor()
+// {
+//     std::cout << "\b \b";
+// }
+
 }
 
 #endif
