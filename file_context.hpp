@@ -12,6 +12,8 @@ namespace tex
 {
 
 class FileContext {
+private:
+    void matchPosToCurrentLine();
 public:
     std::string fileName;
     file_content content;
@@ -26,6 +28,12 @@ public:
     void insertChar(char ch);
 
     void enter();
+    void backspace();
+
+    void movePosRight();
+    void movePosLeft();
+    void movePosUp();
+    void movePosDown();
 };
 
 }
