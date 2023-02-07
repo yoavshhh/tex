@@ -31,6 +31,9 @@ public:
     bool getConsoleBufferSize(pnt& pos);
     bool setConsoleBufferSize(const pnt& pos);
 
+    // void insertCharAtCursor(char ch);
+    // void clearCharAtCursor();
+
 private:
     HANDLE hConsoleBuffer;
     OutBuffer *outBuff;

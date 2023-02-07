@@ -11,7 +11,7 @@ int main(void)
         std::cout << std::make_pair(tex::Color::RED, tex::Color::WHITE) << "Could not initialize" << std::endl;
         return 1;
     }
-    std::cout << tex::Color::RED << "Initialized!" << tex::Color::NONE << std::endl;
+    // std::cout << tex::Color::RED << "Initialized!" << tex::Color::NONE << std::endl;
     tex_app.MainLoop();
     tex_app.Finish();
     return 0;
