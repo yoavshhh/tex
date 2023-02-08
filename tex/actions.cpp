@@ -20,9 +20,40 @@ namespace tex
         }
     }
 
+    void clearContent(Tex &tex) 
+    {
+        matchCursorPos(tex);
+
+        int lineCounter = 0;
+        for(file_content::iterator it = tex.currentContext.currentLine; it != tex.currentContext.content.end(); it++) 
+        {
+            line::iterator lineStart;
+            int lineStartIndex;
+            if(it == tex.currentContext.currentLine)
+            {
+                lineStart = tex.currentContext.currentPosition;
+                lineStartIndex = tex.currentContext.currentPositionIndex;
+            }
+            else
+            {
+                lineStart = (*it).begin();
+                lineStartIndex = 0;
+            }
+
+            tex.console->setCursorPos({(*it).size(), tex.currentContext.currentLineIndex + lineCounter});
+            for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
+            {
+                tex.console->clearCharAtCursor();
+            }
+
+            lineCounter++;
+        }
+
+        matchCursorPos(tex);
+    }
+
     void renderCurrentLine(Tex &tex) 
     {
-        clearLine(tex);
         line::iterator it = tex.currentContext.currentPosition; 
         for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
         {
@@ -32,22 +63,77 @@ namespace tex
         matchCursorPos(tex);
     }
 
+    void renderContent(Tex &tex) 
+    {
+        matchCursorPos(tex);
+
+        int lineCounter = 0;
+        for(file_content::iterator it = tex.currentContext.currentLine; it != tex.currentContext.content.end(); it++) 
+        {
+            line::iterator lineStart;
+            if(it == tex.currentContext.currentLine)
+            {
+                lineStart = tex.currentContext.currentPosition;
+            }
+            else
+            {
+                lineStart = (*it).begin();
+            }
+
+            for(line::iterator lineIt = lineStart; lineIt != (*it).end(); lineIt++) 
+            {
+                tex.console->insertCharAtCursor(*lineIt);
+            }
+            tex.console->insertCharAtCursor('\n');
+
+            lineCounter++;
+        }
+
+        matchCursorPos(tex);
+    }
+
     void insertChar(Tex &tex)
     {
+        clearLine(tex);
+
         tex.currentContext.insertChar(tex.lastPress.ch);
+
         tex.console->insertCharAtCursor(tex.lastPress.ch);
-        // renderCurrentLine(tex);
+
+        renderCurrentLine(tex);
     }
     void enter(Tex &tex)
     {
+        clearContent(tex);
+
         tex.currentContext.enter();
+
+        renderContent(tex);
+        
         // std::cout << "a";
     }
     void backspace(Tex &tex)
     {
+        clearLine(tex);
+
+        int lineIndex = tex.currentContext.currentLineIndex;
+
         tex.currentContext.backspace();
+
+        int afterActionLineIndex = tex.currentContext.currentLineIndex;
+
         tex.console->clearCharAtCursor();
-        renderCurrentLine(tex);
+
+
+        if(lineIndex == afterActionLineIndex)
+        {
+            renderCurrentLine(tex);
+        }
+        else 
+        {
+            renderContent(tex);
+        }
+
     }
     void movePosRight(Tex &tex)
     {
