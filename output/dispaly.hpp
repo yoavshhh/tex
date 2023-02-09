@@ -21,11 +21,14 @@ public:
     void renderCurrentLine(FileContext &context);
 
     void renderContent(FileContext &context);
+<<<<<<< HEAD
     
     bool getCursorPos(pnt& pos);
     bool setCursorPos(const pnt& pos);
     void insertCharAtCursor(char ch);
     void clearCharAtCursor();
+=======
+>>>>>>> d36b1b7 (created display class to handle all the display)
 };
 
 }

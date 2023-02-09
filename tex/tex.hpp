@@ -10,7 +10,7 @@
 #include "actions.hpp"
 #include "../input/user_input.hpp"
 #include "../context/file_context.hpp"
-#include "../output/console.hpp"
+#include "../output/dispaly.hpp"
 #include "../output/colors/color.hpp"
 #include "../input/user_input.hpp"
 #include "../context/file_context.hpp"
@@ -22,8 +22,12 @@ namespace tex
 
 class Tex {
 public:
+<<<<<<< HEAD
     Console *console;
     Console *console;
+=======
+    Display display;
+>>>>>>> d36b1b7 (created display class to handle all the display)
     std::unordered_map<Press, std::function<void(Tex&)>> inputMap;
     FileContext currentContext;
     Press lastPress; // in future - stack of last presses to enable restore

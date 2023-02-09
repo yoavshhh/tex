@@ -3,147 +3,147 @@
 namespace tex
 {
 
-    void matchCursorPos(Tex &tex)
-    {
-        if (!tex.console->setCursorPos({tex.currentContext.currentPositionIndex, tex.currentContext.currentLineIndex}))
-        {
-            std::cerr << "didn't work" << std::endl;
-        }
-    }
+    // void matchCursorPos(Tex &tex)
+    // {
+    //     if (!tex.console->setCursorPos({tex.currentContext.currentPositionIndex, tex.currentContext.currentLineIndex}))
+    //     {
+    //         std::cerr << "setCursorPos failed" << std::endl;
+    //     }
+    // }
 
-    void clearLine(Tex &tex)
-    {
-        tex.console->setCursorPos({(*tex.currentContext.currentLine).size(), tex.currentContext.currentLineIndex});
-        for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
-        {
-            tex.console->clearCharAtCursor();
-        }
-    }
+    // void clearLine(Tex &tex)
+    // {
+    //     tex.console->setCursorPos({(*tex.currentContext.currentLine).size(), tex.currentContext.currentLineIndex});
+    //     for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
+    //     {
+    //         tex.console->clearCharAtCursor();
+    //     }
+    // }
 
-    void clearContent(Tex &tex) 
-    {
-        matchCursorPos(tex);
+    // void clearContent(Tex &tex) 
+    // {
+    //     tex.display.matchCursorPos(tex.currentContext);
 
-        int lineCounter = 0;
-        for(file_content::iterator it = tex.currentContext.currentLine; it != tex.currentContext.content.end(); it++) 
-        {
-            line::iterator lineStart;
-            int lineStartIndex;
-            if(it == tex.currentContext.currentLine)
-            {
-                lineStart = tex.currentContext.currentPosition;
-                lineStartIndex = tex.currentContext.currentPositionIndex;
-            }
-            else
-            {
-                lineStart = (*it).begin();
-                lineStartIndex = 0;
-            }
+    //     int lineCounter = 0;
+    //     for(file_content::iterator it = tex.currentContext.currentLine; it != tex.currentContext.content.end(); it++) 
+    //     {
+    //         line::iterator lineStart;
+    //         int lineStartIndex;
+    //         if(it == tex.currentContext.currentLine)
+    //         {
+    //             lineStart = tex.currentContext.currentPosition;
+    //             lineStartIndex = tex.currentContext.currentPositionIndex;
+    //         }
+    //         else
+    //         {
+    //             lineStart = (*it).begin();
+    //             lineStartIndex = 0;
+    //         }
 
-            tex.console->setCursorPos({(*it).size(), tex.currentContext.currentLineIndex + lineCounter});
-            for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
-            {
-                tex.console->clearCharAtCursor();
-            }
+    //         tex.display.console->setCursorPos({(*it).size(), tex.currentContext.currentLineIndex + lineCounter});
+    //         for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
+    //         {
+    //             tex.display.console->clearCharAtCursor();
+    //         }
 
-            lineCounter++;
-        }
+    //         lineCounter++;
+    //     }
 
-        matchCursorPos(tex);
-    }
+    //     tex.display.matchCursorPos(tex.currentContext);
+    // }
 
-    void renderCurrentLine(Tex &tex) 
-    {
-        line::iterator it = tex.currentContext.currentPosition; 
-        for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
-        {
-            tex.console->insertCharAtCursor(*it);
-            it++;
-        }
-        matchCursorPos(tex);
-    }
+    // void renderCurrentLine(Tex &tex) 
+    // {
+    //     line::iterator it = tex.currentContext.currentPosition; 
+    //     for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
+    //     {
+    //         tex.console->insertCharAtCursor(*it);
+    //         it++;
+    //     }
+    //     matchCursorPos(tex);
+    // }
 
-    void renderContent(Tex &tex) 
-    {
-        matchCursorPos(tex);
+    // void renderContent(Tex &tex) 
+    // {
+    //     tex.display.matchCursorPos(tex.currentContext);
 
-        int lineCounter = 0;
-        for(file_content::iterator it = tex.currentContext.currentLine; it != tex.currentContext.content.end(); it++) 
-        {
-            line::iterator lineStart;
-            if(it == tex.currentContext.currentLine)
-            {
-                lineStart = tex.currentContext.currentPosition;
-            }
-            else
-            {
-                lineStart = (*it).begin();
-            }
+    //     int lineCounter = 0;
+    //     for(file_content::iterator it = tex.currentContext.currentLine; it != tex.currentContext.content.end(); it++) 
+    //     {
+    //         line::iterator lineStart;
+    //         if(it == tex.currentContext.currentLine)
+    //         {
+    //             lineStart = tex.currentContext.currentPosition;
+    //         }
+    //         else
+    //         {
+    //             lineStart = (*it).begin();
+    //         }
 
-            for(line::iterator lineIt = lineStart; lineIt != (*it).end(); lineIt++) 
-            {
-                tex.console->insertCharAtCursor(*lineIt);
-            }
-            tex.console->insertCharAtCursor('\n');
+    //         for(line::iterator lineIt = lineStart; lineIt != (*it).end(); lineIt++) 
+    //         {
+    //             tex.display.console->insertCharAtCursor(*lineIt);
+    //         }
+    //         tex.display.console->insertCharAtCursor('\n');
 
-            lineCounter++;
-        }
+    //         lineCounter++;
+    //     }
 
-        matchCursorPos(tex);
-    }
+    //     tex.display.matchCursorPos(tex.currentContext);
+    // }
 
     void insertChar(Tex &tex)
     {
-        clearLine(tex);
+        tex.display.clearLine(tex.currentContext);
 
         tex.currentContext.insertChar(tex.lastPress.ch);
 
-        tex.console->insertCharAtCursor(tex.lastPress.ch);
+        tex.display.console->insertCharAtCursor(tex.lastPress.ch);
 
-        renderCurrentLine(tex);
+        tex.display.renderCurrentLine(tex.currentContext);
     }
     void enter(Tex &tex)
     {
-        clearContent(tex);
+        tex.display.clearContent(tex.currentContext);
 
         tex.currentContext.enter();
 
-        renderContent(tex);
+        tex.display.renderContent(tex.currentContext);
     }
     void backspace(Tex &tex)
     {
         pnt currentPos;
-        tex.console->getCursorPos(currentPos);
+        tex.display.console->getCursorPos(currentPos);
         bool isContentChanged = currentPos.first == 0;
 
-        isContentChanged ? clearContent(tex) : clearLine(tex);
+        isContentChanged ? tex.display.clearContent(tex.currentContext) : tex.display.clearLine(tex.currentContext);
 
         tex.currentContext.backspace();
 
-        tex.console->clearCharAtCursor();
+        tex.display.console->clearCharAtCursor();
 
-        isContentChanged ? renderContent(tex) : renderCurrentLine(tex);
+        isContentChanged ?  tex.display.renderContent(tex.currentContext) :  tex.display.renderCurrentLine(tex.currentContext);
 
     }
     void movePosRight(Tex &tex)
     {
         tex.currentContext.movePosRight();
-        matchCursorPos(tex);
+        tex.display.matchCursorPos(tex.currentContext);
     }
     void movePosLeft(Tex &tex)
     {
         tex.currentContext.movePosLeft();
-        matchCursorPos(tex);
+        tex.display.matchCursorPos(tex.currentContext);
     }
     void movePosUp(Tex &tex)
     {
         tex.currentContext.movePosUp();
-        matchCursorPos(tex);
+        tex.display.matchCursorPos(tex.currentContext);
     }
     void movePosDown(Tex &tex)
     {
         tex.currentContext.movePosDown();
-        matchCursorPos(tex);
+        tex.display.matchCursorPos(tex.currentContext);
     }
 #include "actions.hpp"
 
