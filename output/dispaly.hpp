@@ -22,13 +22,19 @@ public:
 
     void renderContent(FileContext &context);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9b171d4 (made sure all display goes through display class)
     
     bool getCursorPos(pnt& pos);
     bool setCursorPos(const pnt& pos);
     void insertCharAtCursor(char ch);
     void clearCharAtCursor();
+<<<<<<< HEAD
 =======
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+>>>>>>> 9b171d4 (made sure all display goes through display class)
 };
 
 }

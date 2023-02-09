@@ -6,6 +6,9 @@ namespace tex
         console(Console::getConsole()) { }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9b171d4 (made sure all display goes through display class)
     bool Display::getCursorPos(pnt& pos)
     {
         return console->getCursorPos(pos);
@@ -23,6 +26,7 @@ namespace tex
         console->clearCharAtCursor();
     }
 
+<<<<<<< HEAD
     void Display::matchCursorPos(FileContext &context)
     {
         if (!setCursorPos({context.currentPositionIndex, context.currentLineIndex}))
@@ -31,6 +35,11 @@ namespace tex
     {
         if (!console->setCursorPos({context.currentPositionIndex, context.currentLineIndex}))
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+    void Display::matchCursorPos(FileContext &context)
+    {
+        if (!setCursorPos({context.currentPositionIndex, context.currentLineIndex}))
+>>>>>>> 9b171d4 (made sure all display goes through display class)
         {
             std::cerr << "setCursorPos failed" << std::endl;
         }
@@ -38,6 +47,7 @@ namespace tex
 
     void Display::clearLine(FileContext &context)
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
        setCursorPos({(*context.currentLine).size(), context.currentLineIndex});
         for(int i = context.currentPositionIndex; i < (int)(*context.currentLine).size(); i++) 
@@ -49,6 +59,12 @@ namespace tex
         {
             console->clearCharAtCursor();
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+       setCursorPos({(*context.currentLine).size(), context.currentLineIndex});
+        for(int i = context.currentPositionIndex; i < (int)(*context.currentLine).size(); i++) 
+        {
+           clearCharAtCursor();
+>>>>>>> 9b171d4 (made sure all display goes through display class)
         }
     }
 
@@ -73,6 +89,7 @@ namespace tex
             }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
            setCursorPos({(*it).size(), context.currentLineIndex + lineCounter});
             for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
             {
@@ -83,6 +100,12 @@ namespace tex
             {
                 console->clearCharAtCursor();
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+           setCursorPos({(*it).size(), context.currentLineIndex + lineCounter});
+            for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
+            {
+               clearCharAtCursor();
+>>>>>>> 9b171d4 (made sure all display goes through display class)
             }
 
             lineCounter++;
@@ -97,10 +120,14 @@ namespace tex
         for(int i = context.currentPositionIndex; i < (int)(*context.currentLine).size(); i++) 
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
            insertCharAtCursor(*it);
 =======
             console->insertCharAtCursor(*it);
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+           insertCharAtCursor(*it);
+>>>>>>> 9b171d4 (made sure all display goes through display class)
             it++;
         }
         matchCursorPos(context);
@@ -126,6 +153,7 @@ namespace tex
             for(line::iterator lineIt = lineStart; lineIt != (*it).end(); lineIt++) 
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                insertCharAtCursor(*lineIt);
             }
            insertCharAtCursor('\n');
@@ -134,6 +162,11 @@ namespace tex
             }
             console->insertCharAtCursor('\n');
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+               insertCharAtCursor(*lineIt);
+            }
+           insertCharAtCursor('\n');
+>>>>>>> 9b171d4 (made sure all display goes through display class)
 
             lineCounter++;
         }
