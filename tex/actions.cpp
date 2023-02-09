@@ -109,30 +109,20 @@ namespace tex
         tex.currentContext.enter();
 
         renderContent(tex);
-        
-        // std::cout << "a";
     }
     void backspace(Tex &tex)
     {
-        clearLine(tex);
+        pnt currentPos;
+        tex.console->getCursorPos(currentPos);
+        bool isContentChanged = currentPos.first == 0;
 
-        int lineIndex = tex.currentContext.currentLineIndex;
+        isContentChanged ? clearContent(tex) : clearLine(tex);
 
         tex.currentContext.backspace();
 
-        int afterActionLineIndex = tex.currentContext.currentLineIndex;
-
         tex.console->clearCharAtCursor();
 
-
-        if(lineIndex == afterActionLineIndex)
-        {
-            renderCurrentLine(tex);
-        }
-        else 
-        {
-            renderContent(tex);
-        }
+        isContentChanged ? renderContent(tex) : renderCurrentLine(tex);
 
     }
     void movePosRight(Tex &tex)
