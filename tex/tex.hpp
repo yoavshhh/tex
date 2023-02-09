@@ -10,7 +10,7 @@
 #include "actions.hpp"
 #include "../input/user_input.hpp"
 #include "../context/file_context.hpp"
-#include "../output/console.hpp"
+#include "../output/dispaly.hpp"
 #include "../output/colors/color.hpp"
 
 namespace tex 
@@ -18,7 +18,7 @@ namespace tex
 
 class Tex {
 public:
-    Console *console;
+    Display display;
     std::unordered_map<Press, std::function<void(Tex&)>> inputMap;
     FileContext currentContext;
     Press lastPress; // in future - stack of last presses to enable restore
