@@ -21,6 +21,11 @@ public:
     void renderCurrentLine(FileContext &context);
 
     void renderContent(FileContext &context);
+    
+    bool getCursorPos(pnt& pos);
+    bool setCursorPos(const pnt& pos);
+    void insertCharAtCursor(char ch);
+    void clearCharAtCursor();
 };
 
 }

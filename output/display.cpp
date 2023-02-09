@@ -5,9 +5,26 @@ namespace tex
     Display::Display() :
         console(Console::getConsole()) { }
 
+    bool Display::getCursorPos(pnt& pos)
+    {
+        return console->getCursorPos(pos);
+    }
+    bool Display::setCursorPos(const pnt& pos)
+    {
+        return console->setCursorPos(pos);
+    }
+    void Display::insertCharAtCursor(char ch)
+    {
+        console->insertCharAtCursor(ch);
+    }
+    void Display::clearCharAtCursor()
+    {
+        console->clearCharAtCursor();
+    }
+
     void Display::matchCursorPos(FileContext &context)
     {
-        if (!console->setCursorPos({context.currentPositionIndex, context.currentLineIndex}))
+        if (!setCursorPos({context.currentPositionIndex, context.currentLineIndex}))
         {
             std::cerr << "setCursorPos failed" << std::endl;
         }
@@ -15,10 +32,10 @@ namespace tex
 
     void Display::clearLine(FileContext &context)
     {
-        console->setCursorPos({(*context.currentLine).size(), context.currentLineIndex});
+       setCursorPos({(*context.currentLine).size(), context.currentLineIndex});
         for(int i = context.currentPositionIndex; i < (int)(*context.currentLine).size(); i++) 
         {
-            console->clearCharAtCursor();
+           clearCharAtCursor();
         }
     }
 
@@ -42,10 +59,10 @@ namespace tex
                 lineStartIndex = 0;
             }
 
-            console->setCursorPos({(*it).size(), context.currentLineIndex + lineCounter});
+           setCursorPos({(*it).size(), context.currentLineIndex + lineCounter});
             for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
             {
-                console->clearCharAtCursor();
+               clearCharAtCursor();
             }
 
             lineCounter++;
@@ -59,7 +76,7 @@ namespace tex
         line::iterator it = context.currentPosition; 
         for(int i = context.currentPositionIndex; i < (int)(*context.currentLine).size(); i++) 
         {
-            console->insertCharAtCursor(*it);
+           insertCharAtCursor(*it);
             it++;
         }
         matchCursorPos(context);
@@ -84,9 +101,9 @@ namespace tex
 
             for(line::iterator lineIt = lineStart; lineIt != (*it).end(); lineIt++) 
             {
-                console->insertCharAtCursor(*lineIt);
+               insertCharAtCursor(*lineIt);
             }
-            console->insertCharAtCursor('\n');
+           insertCharAtCursor('\n');
 
             lineCounter++;
         }

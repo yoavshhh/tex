@@ -5,7 +5,7 @@ namespace tex
 
     // void matchCursorPos(Tex &tex)
     // {
-    //     if (!tex.console->setCursorPos({tex.currentContext.currentPositionIndex, tex.currentContext.currentLineIndex}))
+    //     if (!tex.setCursorPos({tex.currentContext.currentPositionIndex, tex.currentContext.currentLineIndex}))
     //     {
     //         std::cerr << "setCursorPos failed" << std::endl;
     //     }
@@ -13,10 +13,10 @@ namespace tex
 
     // void clearLine(Tex &tex)
     // {
-    //     tex.console->setCursorPos({(*tex.currentContext.currentLine).size(), tex.currentContext.currentLineIndex});
+    //     tex.setCursorPos({(*tex.currentContext.currentLine).size(), tex.currentContext.currentLineIndex});
     //     for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
     //     {
-    //         tex.console->clearCharAtCursor();
+    //         tex.clearCharAtCursor();
     //     }
     // }
 
@@ -40,10 +40,10 @@ namespace tex
     //             lineStartIndex = 0;
     //         }
 
-    //         tex.display.console->setCursorPos({(*it).size(), tex.currentContext.currentLineIndex + lineCounter});
+    //         tex.display.setCursorPos({(*it).size(), tex.currentContext.currentLineIndex + lineCounter});
     //         for(int i = lineStartIndex; i < (int)(*it).size(); i++) 
     //         {
-    //             tex.display.console->clearCharAtCursor();
+    //             tex.display.clearCharAtCursor();
     //         }
 
     //         lineCounter++;
@@ -57,7 +57,7 @@ namespace tex
     //     line::iterator it = tex.currentContext.currentPosition; 
     //     for(int i = tex.currentContext.currentPositionIndex; i < (int)(*tex.currentContext.currentLine).size(); i++) 
     //     {
-    //         tex.console->insertCharAtCursor(*it);
+    //         tex.insertCharAtCursor(*it);
     //         it++;
     //     }
     //     matchCursorPos(tex);
@@ -82,9 +82,9 @@ namespace tex
 
     //         for(line::iterator lineIt = lineStart; lineIt != (*it).end(); lineIt++) 
     //         {
-    //             tex.display.console->insertCharAtCursor(*lineIt);
+    //             tex.display.insertCharAtCursor(*lineIt);
     //         }
-    //         tex.display.console->insertCharAtCursor('\n');
+    //         tex.display.insertCharAtCursor('\n');
 
     //         lineCounter++;
     //     }
@@ -98,7 +98,7 @@ namespace tex
 
         tex.currentContext.insertChar(tex.lastPress.ch);
 
-        tex.display.console->insertCharAtCursor(tex.lastPress.ch);
+        tex.display.insertCharAtCursor(tex.lastPress.ch);
 
         tex.display.renderCurrentLine(tex.currentContext);
     }
@@ -113,14 +113,14 @@ namespace tex
     void backspace(Tex &tex)
     {
         pnt currentPos;
-        tex.display.console->getCursorPos(currentPos);
+        tex.display.getCursorPos(currentPos);
         bool isContentChanged = currentPos.first == 0;
 
         isContentChanged ? tex.display.clearContent(tex.currentContext) : tex.display.clearLine(tex.currentContext);
 
         tex.currentContext.backspace();
 
-        tex.display.console->clearCharAtCursor();
+        tex.display.clearCharAtCursor();
 
         isContentChanged ?  tex.display.renderContent(tex.currentContext) :  tex.display.renderCurrentLine(tex.currentContext);
 
