@@ -64,6 +64,18 @@ void FileContext::enter()
     currentPositionIndex = 0;
 }
 
+void FileContext::movePosEnd()
+{
+    currentPosition = (*currentLine).end();
+    currentPositionIndex = (*currentLine).size();
+}
+
+void FileContext::movePosStart()
+{
+    currentPosition = (*currentLine).begin();
+    currentPositionIndex = 0;
+}
+
 void FileContext::movePosRight()
 {
     if( currentPositionIndex < (int)(*currentLine).size())

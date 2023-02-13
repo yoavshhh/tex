@@ -10,6 +10,8 @@ void insertChar(class Tex &t);
 void enter(class Tex &t);
 void tab(class Tex &t);
 void backspace(class Tex &t);
+void home(class Tex &t);
+void end(class Tex &t);
 void movePosRight(class Tex &t);
 void movePosLeft(class Tex &t);
 void movePosUp(class Tex &t);

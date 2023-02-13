@@ -138,6 +138,16 @@ namespace tex
         isContentChanged ?  tex.display.renderContent(tex.currentContext) :  tex.display.renderCurrentLine(tex.currentContext);
 
     }
+    void home(Tex &tex)
+    {
+        tex.currentContext.movePosStart();
+        tex.display.matchCursorPos(tex.currentContext);
+    }
+    void end(Tex &tex)
+    {
+        tex.currentContext.movePosEnd();
+        tex.display.matchCursorPos(tex.currentContext);
+    }
     void movePosRight(Tex &tex)
     {
         tex.currentContext.movePosRight();

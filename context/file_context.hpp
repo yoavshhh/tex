@@ -32,6 +32,8 @@ public:
     void enter();
     void backspace();
 
+    void movePosEnd();
+    void movePosStart();
     void movePosRight();
     void movePosLeft();
     void movePosUp();

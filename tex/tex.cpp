@@ -37,6 +37,14 @@ bool Tex::Init()
     p = { .ch = (char)39, .state = KB_NONE };
     this->inputMap.emplace(std::make_pair(p, movePosRight));
 
+    
+    // HOME key
+    p = { .ch = '$', .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, home));
+    // END key
+    p = { .ch = '#', .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, end));
+
     // enter/return
     p = { .ch = '\r', .state = KB_NONE };
     this->inputMap.emplace(std::make_pair(p, enter));
