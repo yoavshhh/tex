@@ -36,6 +36,12 @@ bool Tex::Init()
     // right arrow
     p = { .ch = (char)39, .state = KB_NONE };
     this->inputMap.emplace(std::make_pair(p, movePosRight));
+    // crtl + right arrow
+    p = { .ch = (char)103, .state = KB_CTRL };
+    this->inputMap.emplace(std::make_pair(p, movePosRightCtrl));
+    // crtl + left arrow
+    p = { .ch = (char)101, .state = KB_CTRL };
+    this->inputMap.emplace(std::make_pair(p, movePosLeftCtrl));
 
     
     // HOME key

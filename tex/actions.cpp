@@ -168,5 +168,24 @@ namespace tex
         tex.currentContext.movePosDown();
         tex.display.matchCursorPos(tex.currentContext);
     }
+    
+    void movePosRightCtrl(Tex &tex)
+    {
+        tex.currentContext.movePosRight();
+        while(tex.currentContext.currentPosition != (*tex.currentContext.currentLine).end() && IS_SKIPABLE_BY_CTRL((int)*tex.currentContext.currentPosition))
+        {
+            tex.currentContext.movePosRight();
+        }
+        tex.display.matchCursorPos(tex.currentContext);
+    }
+    void movePosLeftCtrl(Tex &tex)
+    {
+        tex.currentContext.movePosLeft();
+        while(tex.currentContext.currentPositionIndex != 0 && IS_SKIPABLE_BY_CTRL((int)*tex.currentContext.currentPosition))
+        {
+            tex.currentContext.movePosLeft();
+        }
+        tex.display.matchCursorPos(tex.currentContext);
+    }
 
 }

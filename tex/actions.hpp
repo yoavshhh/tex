@@ -16,5 +16,7 @@ void movePosRight(class Tex &t);
 void movePosLeft(class Tex &t);
 void movePosUp(class Tex &t);
 void movePosDown(class Tex &t);
+void movePosRightCtrl(class Tex &t);
+void movePosLeftCtrl(class Tex &t);
 
 }

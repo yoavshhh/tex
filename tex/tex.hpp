@@ -14,6 +14,7 @@
 #include "../output/colors/color.hpp"
 
 #define TAB_SPACE_AMOUNT 4
+#define IS_SKIPABLE_BY_CTRL(C) ((C >= 65 && C <= 90) || (C >= 97 && C <= 122) || (C >= 48 && C <= 57))
 
 namespace tex 
 {
