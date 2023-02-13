@@ -4,7 +4,6 @@
 
 int main(void)
 {
-    std::cout << tex::Color::NONE;
     tex::Tex tex_app;
     if (!tex_app.Init())
     {

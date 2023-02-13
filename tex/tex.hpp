@@ -13,6 +13,8 @@
 #include "../output/dispaly.hpp"
 #include "../output/colors/color.hpp"
 
+#define TAB_SPACE_AMOUNT 4
+
 namespace tex 
 {
 

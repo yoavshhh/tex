@@ -8,6 +8,7 @@ namespace tex
 
 void insertChar(class Tex &t);
 void enter(class Tex &t);
+void tab(class Tex &t);
 void backspace(class Tex &t);
 void movePosRight(class Tex &t);
 void movePosLeft(class Tex &t);

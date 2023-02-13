@@ -47,6 +47,9 @@ bool Tex::Init()
     // backspace
     p = { .ch = (char)8, .state = KB_NONE };
     this->inputMap.emplace(std::make_pair(p, backspace));
+    // tab
+    p = { .ch = 9, .state = KB_NONE };
+    this->inputMap.emplace(std::make_pair(p, tab));
 
 
     // mapping all printable ascii letters with clear state

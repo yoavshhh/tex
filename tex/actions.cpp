@@ -110,6 +110,19 @@ namespace tex
 
         tex.display.renderContent(tex.currentContext);
     }
+    void tab(Tex &tex)
+    {
+        int i;
+        tex.display.clearLine(tex.currentContext);
+
+        for(i = 0; i < TAB_SPACE_AMOUNT; i++)
+        {
+            tex.currentContext.insertChar(' ');
+            tex.display.insertCharAtCursor(' ');
+        }
+
+        tex.display.renderCurrentLine(tex.currentContext);
+    }
     void backspace(Tex &tex)
     {
         pnt currentPos;
