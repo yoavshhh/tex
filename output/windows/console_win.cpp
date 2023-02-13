@@ -31,7 +31,19 @@ ConsoleWin::~ConsoleWin()
 
 bool ConsoleWin::Init(void)
 {
-    if (! SetConsoleActiveScreenBuffer(hConsoleBuffer) )
+    // setup console buffer
+    pnt sz;
+    if (!getConsoleSize(sz))
+    {
+        std::cerr << "getConsoleSize failed - " << GetLastError() << std:: endl;
+        return false;
+    }
+    if (!setConsoleBufferSize(sz))
+    {
+        std::cerr << "setConsoleBufferSize failed - " << GetLastError() << std:: endl;
+        return false;
+    }
+    if (!SetConsoleActiveScreenBuffer(hConsoleBuffer) )
     {
         std::cerr << "SetConsoleActiveScreenBuffer failed - " << GetLastError() << std:: endl;
         return false;
@@ -58,29 +70,45 @@ bool ConsoleWin::Destroy(void)
 
 bool ConsoleWin::getConsoleSize(pnt& pos)
 {
-
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    if (!GetConsoleScreenBufferInfo(hConsoleBuffer, &info))
+    {
+        return false;
+    }
+    pos.first = info.dwMaximumWindowSize.X;
+    pos.second = info.dwMaximumWindowSize.Y;
+    return true;
 }
+
 bool ConsoleWin::setConsoleSize(const pnt& pos)
 {
-
+    return true;
 }
 
 bool ConsoleWin::getCursorPos(pnt& pos)
 {
-
+    CONSOLE_SCREEN_BUFFER_INFO info;
+    if (!GetConsoleScreenBufferInfo(hConsoleBuffer, &info))
+    {
+        return false;
+    }
+    pos.first = info.dwCursorPosition.X;
+    pos.second = info.dwCursorPosition.Y;
+    return true;
 }
 bool ConsoleWin::setCursorPos(const pnt& pos)
 {
-
+    return SetConsoleCursorPosition(hConsoleBuffer, { (short)pos.first, (short)pos.second });
 }
 
 bool ConsoleWin::getConsoleBufferSize(pnt& pos)
 {
-
+    return true;
 }
+
 bool ConsoleWin::setConsoleBufferSize(const pnt& pos)
 {
-
+    return SetConsoleScreenBufferSize(hConsoleBuffer, { (short)pos.first, (short)pos.second });
 }
 
 }

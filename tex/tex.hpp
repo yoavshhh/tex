@@ -10,11 +10,6 @@
 #include "actions.hpp"
 #include "../input/user_input.hpp"
 #include "../context/file_context.hpp"
-#include "actions.hpp"
-<<<<<<< HEAD:tex.hpp
-#include "console.hpp"
-#include "color.hpp"
-=======
 #include "../output/console.hpp"
 #include "../output/colors/color.hpp"
 

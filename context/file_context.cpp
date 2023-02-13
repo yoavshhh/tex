@@ -1,6 +1,4 @@
 #include "file_context.hpp"
-#include <iostream>
-#include <algorithm>
 
 namespace tex
 {
@@ -52,7 +50,7 @@ void FileContext::enter()
 {
     line newLine = {};
     newLine.splice(newLine.begin(), *currentLine, currentPosition, (*currentLine).end());
-    if(currentLineIndex == content.size() - 1) {
+    if(currentLineIndex == ((int)content.size()) - 1) {
         content.insert(content.end(), newLine);
         currentLine = --content.end();
     }
@@ -68,7 +66,7 @@ void FileContext::enter()
 
 void FileContext::movePosRight()
 {
-    if( currentPositionIndex < (*currentLine).size())
+    if( currentPositionIndex < (int)(*currentLine).size())
     {
         currentPosition++;
         currentPositionIndex++;
@@ -93,7 +91,7 @@ void FileContext::movePosUp()
 }
 void FileContext::movePosDown()
 {
-    if(currentLineIndex < content.size() - 1)
+    if(currentLineIndex < ((int)content.size()) - 1)
     {
         currentLine++;
         currentLineIndex++;
