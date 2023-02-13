@@ -98,6 +98,30 @@ bool ConsoleWin::getCursorPos(pnt& pos)
 }
 bool ConsoleWin::setCursorPos(const pnt& pos)
 {
+    // CONSOLE_SCREEN_BUFFER_INFO info;
+    // CHAR_INFO chi;
+    // if (!GetConsoleScreenBufferInfo(hConsoleBuffer, &info))
+    // {
+    //     return false;
+    // }
+    // if(pos.second > info.srWindow.Bottom)
+    // {
+    //     chi.Attributes = BACKGROUND_GREEN | FOREGROUND_RED;
+    //     chi.Char.AsciiChar = (char)' ';
+    //     ScrollConsoleScreenBuffer(hConsoleBuffer, &info.srWindow, &info.srWindow, {info.srWindow.Left, (short)(pos.second - info.srWindow.Bottom)}, &chi);
+    // }
+    // if(pos.second <= info.srWindow.Top)
+    // {
+    //     chi.Attributes = BACKGROUND_GREEN | FOREGROUND_RED;
+    //     chi.Char.AsciiChar = (char)' ';
+    //     ScrollConsoleScreenBuffer(hConsoleBuffer, &info.srWindow, &info.srWindow, {info.srWindow.Left, (short)(pos.second - 1)}, &chi);
+    // }
+    // if(pos.second >= info.dwSize.Y)
+    // {
+    //     chi.Attributes = BACKGROUND_GREEN | FOREGROUND_RED;
+    //     chi.Char.AsciiChar = (char)' ';
+    //     ScrollConsoleScreenBuffer(hConsoleBuffer, &info.srWindow, &info.srWindow, pos, &chi);
+    // }
     return SetConsoleCursorPosition(hConsoleBuffer, { (short)pos.first, (short)pos.second });
 }
 

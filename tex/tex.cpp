@@ -18,7 +18,7 @@ Tex::Tex(std::string fileName) :
 bool Tex::Init()
 {
     // console initialization
-    if (!display.console->Init())
+    if (!display.Init())
     {
         return false;
     }
