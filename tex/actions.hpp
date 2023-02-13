@@ -1,5 +1,7 @@
 #pragma once
 #include "tex.hpp"
+#include "../output/console.hpp"
+#include "../output/windows/console_win.hpp"
 
 namespace tex
 {

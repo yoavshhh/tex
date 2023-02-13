@@ -150,7 +150,7 @@ Press Press::getPress()
 				case VK_NONAME:
 				case VK_PA1:
 				case VK_OEM_CLEAR:
-					std::cout << (int)eventRecord.Event.KeyEvent.wVirtualKeyCode << " | " << (int)eventRecord.Event.KeyEvent.uChar.AsciiChar << std::endl;
+					// std::cout << (int)eventRecord.Event.KeyEvent.wVirtualKeyCode << " | " << (int)eventRecord.Event.KeyEvent.uChar.AsciiChar << std::endl;
                     continue;
                 
                 default:

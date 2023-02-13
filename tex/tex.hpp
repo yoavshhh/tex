@@ -12,12 +12,17 @@
 #include "../context/file_context.hpp"
 #include "../output/console.hpp"
 #include "../output/colors/color.hpp"
+#include "../input/user_input.hpp"
+#include "../context/file_context.hpp"
+#include "../output/console.hpp"
+#include "../output/colors/color.hpp"
 
 namespace tex 
 {
 
 class Tex {
 public:
+    Console *console;
     Console *console;
     std::unordered_map<Press, std::function<void(Tex&)>> inputMap;
     FileContext currentContext;

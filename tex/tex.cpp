@@ -14,9 +14,25 @@ Tex::Tex(std::string fileName) :
     inputMap({}),
     currentContext(FileContext(fileName)),
     lastPress({0}) { }
+Tex::Tex() :
+    console(Console::getConsole()),
+    inputMap({}),
+    currentContext(FileContext("")),
+    lastPress({0}) { }
+
+Tex::Tex(std::string fileName) :
+    console(Console::getConsole()),
+    inputMap({}),
+    currentContext(FileContext(fileName)),
+    lastPress({0}) { }
 
 bool Tex::Init()
 {
+    // console initialization
+    if (!console->Init())
+    {
+        return false;
+    }
     // console initialization
     if (!console->Init())
     {
@@ -83,6 +99,7 @@ void Tex::MainLoop()
     {
         lastPress = Press::getPress();
         system("cls");
+        system("cls");
         lastPress.print();
         auto inputPair = inputMap.find(lastPress);
         if (inputPair == inputMap.end())
@@ -94,6 +111,10 @@ void Tex::MainLoop()
         inputPair->second(*this);
         std::cout << "current pos: " << currentContext.currentPositionIndex << ", and current line: " << currentContext.currentLineIndex << std::endl;
         printContent(currentContext.content);
+        if (!console->setCursorPos({currentContext.currentPositionIndex, currentContext.currentLineIndex+5}))
+        {
+            std::cerr << "didn't work" << std::endl;
+        }
         if (!console->setCursorPos({currentContext.currentPositionIndex, currentContext.currentLineIndex+5}))
         {
             std::cerr << "didn't work" << std::endl;
