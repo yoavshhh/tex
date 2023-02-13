@@ -12,6 +12,8 @@ public:
 
     Display();
 
+    bool Init();
+
     void matchCursorPos(FileContext &context);
 
     void clearLine(FileContext &context);
@@ -31,10 +33,15 @@ public:
     void insertCharAtCursor(char ch);
     void clearCharAtCursor();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> d36b1b7 (created display class to handle all the display)
 =======
 >>>>>>> 9b171d4 (made sure all display goes through display class)
+=======
+private:
+    int headerLinePadding;
+>>>>>>> ddca507 (added init to display class)
 };
 
 }

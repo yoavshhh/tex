@@ -19,10 +19,14 @@ bool Tex::Init()
 {
     // console initialization
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (!display.Init())
 =======
     if (!display.console->Init())
 >>>>>>> d36b1b7 (created display class to handle all the display)
+=======
+    if (!display.Init())
+>>>>>>> ddca507 (added init to display class)
     {
         return false;
     }

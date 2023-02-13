@@ -3,7 +3,32 @@
 namespace tex
 {
     Display::Display() :
-        console(Console::getConsole()) { }
+        console(Console::getConsole()),
+        headerLinePadding(2) { }
+        
+
+    bool Display::Init()
+    {
+        if (!console->Init())
+        {
+            return false;
+        }
+        std::string header = "Tex - text editor";
+        for(std::string::iterator ch = header.begin(); ch != header.end(); ch++)
+        {
+            console->insertCharAtCursor(*ch);
+        }
+
+
+        // console->setCursorPos({0, headerLinePadding + 2});
+        // std::string ending = "ending test";
+        // for(std::string::iterator ch = ending.begin(); ch != ending.end(); ch++)
+        // {
+            // console->insertCharAtCursor(*ch);
+        // }
+        console->setCursorPos({0, headerLinePadding});
+        return true;
+    }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -15,7 +40,7 @@ namespace tex
     }
     bool Display::setCursorPos(const pnt& pos)
     {
-        return console->setCursorPos(pos);
+        return console->setCursorPos({pos.first, pos.second + headerLinePadding});
     }
     void Display::insertCharAtCursor(char ch)
     {
